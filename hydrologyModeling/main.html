@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Hydrology Modeling</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" id="theme" href="../Styles/light.css" rel="stylesheet" />
+	</head>
+	<body>
+        <!-- libs -->
+        <script type="text/javascript" src="../Scripts/libs/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../Scripts/libs/jquery.json.min.js"></script>
+		<script type="text/javascript" src="../Scripts/libs/signals.min.js"></script>
+		<script type="text/javascript" src="../Scripts/libs/ui.js"></script>
+
+        <!--hydrology-->
+		<script type="text/javascript" src="../Scripts/hydrology/Editor.js"></script>
+		<script type="text/javascript" src="../Scripts/hydrology/Menubar.js"></script>
+		<script type="text/javascript" src="../Scripts/hydrology/Sidebar.js"></script>
+        <script type="text/javascript" src="../Scripts/hydrology/Toolbar.js"></script>
+        <script type="text/javascript" src="../Scripts/hydrology/Viewport.js"></script>
+
+		<script type="text/javascript" >
+
+		    window.URL = window.URL || window.webkitURL;
+		    window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
+
+		    var editor = new Editor();
+
+		    var viewport = new Viewport(editor).setId('viewport');
+		    document.body.appendChild(viewport.dom);
+
+		    var toolbar = new Toolbar(editor).setId('toolbar');
+		    document.body.appendChild(toolbar.dom);
+
+		    var menubar = new Menubar(editor).setId('menubar');
+		    document.body.appendChild(menubar.dom);
+
+		    var sidebar = new Sidebar(editor).setId('sidebar');
+		    document.body.appendChild(sidebar.dom);
+
+		</script>
+	</body>
+</html>
