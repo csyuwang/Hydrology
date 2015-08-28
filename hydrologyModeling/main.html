@@ -12,11 +12,14 @@
         <script type="text/javascript" src="../Scripts/libs/jquery.json.min.js"></script>
 		<script type="text/javascript" src="../Scripts/libs/signals.min.js"></script>
 		<script type="text/javascript" src="../Scripts/libs/ui.js"></script>
+        <script type="text/javascript" src="../Scripts/libs/ui.editor.js"></script>
+        <script type="text/javascript" src="../Scripts/libs/ui.editor.factory.js"></script>
 
         <!--hydrology-->
 		<script type="text/javascript" src="../Scripts/hydrology/Editor.js"></script>
 		<script type="text/javascript" src="../Scripts/hydrology/Menubar.js"></script>
 		<script type="text/javascript" src="../Scripts/hydrology/Sidebar.js"></script>
+        <script type="text/javascript" src="../Scripts/hydrology/Sidebar.Properties.js"></script>
         <script type="text/javascript" src="../Scripts/hydrology/Toolbar.js"></script>
         <script type="text/javascript" src="../Scripts/hydrology/Viewport.js"></script>
 
@@ -38,6 +41,8 @@
 
 		    var sidebar = new Sidebar(editor).setId('sidebar');
 		    document.body.appendChild(sidebar.dom);
+
+
 
 		</script>
 	</body>

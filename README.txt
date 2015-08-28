@@ -9,3 +9,9 @@
             Viewport.js - 视图窗口
     3. Scripts/libs文件夹下包含各种js库
     4. Styles文件夹下包含样式表
+2015-08-28
+    1. 改进基本的水文框架:
+        添加ui.editor.js和ui.editor.factory.js，
+        EditorUI负责创建网页界面的基本元素（支持自定义），
+        EditorUIFactory工厂类负责组合基本元素，创建界面组件。
+    2. 添加Sidebar.Properties.js，负责物性输入部分

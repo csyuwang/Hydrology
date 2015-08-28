@@ -1,1 +1,1 @@
-var Viewport = function ( editor ) {    var container = new UI.Panel();    return container;};
+var Viewport = function (editor) {    var container = new EditorUI.Panel();    return container;};

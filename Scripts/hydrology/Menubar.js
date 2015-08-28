@@ -1,4 +1,4 @@
-var Menubar = function ( editor ) {
-    var container = new UI.Panel();
+var Menubar = function (editor) {
+    var container = new EditorUI.Panel();
     return container;
 };

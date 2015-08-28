@@ -1,4 +1,4 @@
-var Toolbar = function ( editor ) {
-    var container = new UI.Panel();
+var Toolbar = function (editor) {
+    var container = new EditorUI.Panel();
     return container;
 };
