@@ -1,40 +1,39 @@
 // 侧边栏物性输入
 Sidebar.Properties = function (editor) {
+    var string = Config.Properties.String;
+    var stringArray = Config.Properties.StringArray;
     var container = new EditorUI.CollapsiblePanel();
     container.setCollapsed(true);
     // 设置标题
-    container.addStatic(new EditorUI.Text('Properties'));
+    container.addStatic(new EditorUI.Text(string.title));
     container.add(new EditorUI.Break());
     // 设置导图checkbox
-    var isImportCheckBoxWrapper = EditorUIFactory.createCheckBoxWrapper('isImportMap', isImportMap);
+    var isImportCheckBoxWrapper = EditorUIFactory.createCheckBoxWrapper(string.isImportMap, isImportMap);
     container.add(isImportCheckBoxWrapper);
-
-    var title, options;
     // 设置物性选择框
-    title = 'property';
-    options = ['请选择', 'Conductivity', 'Dispersion', 'Bluk_Density', 'Initial_Head', 'Storage', 'Spac_Params', 'Initial_Concentration'];
-    var propertySelectWrapper = EditorUIFactory.createSelectWrapper(title, options, updateProperty);
+    var propertySelectWrapper = EditorUIFactory.createSelectWrapper(string.property, stringArray.propertyOptions, updateProperty);
     container.add(propertySelectWrapper);
     // 设置层选择框
-    title = 'layer';
-    options = ['请选择', '1', '2', '3', '4', '5', '6', '7', '8'];
-    var layerSelectWrapper = EditorUIFactory.createSelectWrapper(title, options, updateLayer);
+    var layerSelectWrapper = EditorUIFactory.createSelectWrapper(string.layer, stringArray.layerOptions, updateLayer);
     container.add(layerSelectWrapper);
-
+    // 设置zone表格
+    var table = new EditorUI.Table(stringArray.tableHeaders);
+    container.add(table);
+    //table.addRow([new EditorUI.Checkbox(),new EditorUI.Text('a'),new EditorUI.Text('b'),new EditorUI.Text('c')]);
 
     // 是否导图
     function isImportMap() {
-        alert(isImportCheckBoxWrapper.checkBox.getValue());
+        alert(this.getValue());
     }
 
     // 切换物性
     function updateProperty() {
-        alert(propertySelectWrapper.select.getValue());
+        alert(this.getValue());
     }
 
     // 切换层
     function updateLayer() {
-        alert(layerSelectWrapper.select.getValue());
+        alert(this.getValue());
     }
 
     return container;

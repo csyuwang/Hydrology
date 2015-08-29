@@ -15,3 +15,5 @@
         EditorUI负责创建网页界面的基本元素（支持自定义），
         EditorUIFactory工厂类负责组合基本元素，创建界面组件。
     2. 添加Sidebar.Properties.js，负责物性输入部分
+2015-08-29
+    1. 添加Config.js, 配置程序中的字符串，样式等

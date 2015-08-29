@@ -92,23 +92,39 @@ EditorUI.Button.prototype = Object.create(UI.Button.prototype);
 
 
 // Table
-EditorUI.Table = function () {
+EditorUI.Table = function (titles) {
     EditorUI.Element.call(this);
-
+    // table
     var dom = document.createElement('table');
     dom.className = 'Table';
+    // head
+    var thead = document.createElement('thead');
+    var tr = document.createElement('tr');
+    $.each(titles, function (index, title) {
+        var th = document.createElement('th');
+        th.appendChild(new EditorUI.Text(title).dom);
+        tr.appendChild(th);
+    });
+    thead.appendChild(tr);
+    // body
+    var tbody = document.createElement('tbody');
+    dom.appendChild(thead);
+    dom.appendChild(tbody);
 
     this.dom = dom;
-
+    this.body = tbody
     return this;
 };
 EditorUI.Table.prototype = Object.create(EditorUI.Element.prototype);
 
-EditorUI.Table.prototype.setHead = function () {
-
-};
-EditorUI.Table.prototype.setBody = function () {
-
+EditorUI.Table.prototype.addRow = function (UIElements) {
+    var tr = document.createElement('tr');
+    $.each(UIElements, function (index, element) {
+        var td = document.createElement('td');
+        td.appendChild(element.dom);
+        tr.appendChild(td);
+    });
+    this.body.appendChild(tr);
 };
 
 
