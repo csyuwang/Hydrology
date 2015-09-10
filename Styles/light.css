@@ -90,7 +90,7 @@ input.Number {
     position: absolute;
     width: 100%;
     height: 32px;
-    background: #eee;
+    background: #f8f8f8;
     padding: 0px;
     margin: 0px;
 }
@@ -138,7 +138,7 @@ input.Number {
     top: 32px;
     bottom: 0px;
     width: 300px;
-    background: #eee;
+    background: #f8f8f8;
     overflow: auto;
 }
 
@@ -175,7 +175,7 @@ input.Number {
     right: 300px;
     bottom: 0px;
     height: 32px;
-    background: #eee;
+    background: #f8f8f8;
     color: #333;
 }
 

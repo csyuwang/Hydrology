@@ -1,16 +1,19 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<title>Hydrology Modeling</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" id="theme" href="../Styles/light.css" rel="stylesheet" />
+        <link href="../Styles/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link type="text/css" id="theme" href="../Styles/light.css" rel="stylesheet" />
+
 	</head>
 	<body>
         <!-- libs -->
         <script type="text/javascript" src="../Scripts/libs/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="../Scripts/libs/bootstrap.min.js"></script>
         <script type="text/javascript" src="../Scripts/libs/jquery.json.min.js"></script>
-		<script type="text/javascript" src="../Scripts/libs/signals.min.js"></script>
+        <script type="text/javascript" src="../Scripts/libs/signals.min.js"></script>
 		<script type="text/javascript" src="../Scripts/libs/ui.js"></script>
         <script type="text/javascript" src="../Scripts/libs/ui.editor.js"></script>
         <script type="text/javascript" src="../Scripts/libs/ui.editor.factory.js"></script>
@@ -43,7 +46,13 @@
 		    var sidebar = new Sidebar(editor).setId('sidebar');
 		    document.body.appendChild(sidebar.dom);
 
+            var onWindowResize = function (event) {
+                editor.signals.windowResize.dispatch();
+            };
 
+            window.addEventListener('resize', onWindowResize, false);
+
+            onWindowResize();
 
 		</script>
 	</body>

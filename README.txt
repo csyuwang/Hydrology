@@ -17,3 +17,6 @@
     2. 添加Sidebar.Properties.js，负责物性输入部分
 2015-08-29
     1. 添加Config.js, 配置程序中的字符串，样式等
+    2. 删除ui.editor.factory.js
+2015-09-10
+    1. 添加EditorUI.Canvas

@@ -14,3 +14,9 @@ EditorUIFactory.createCheckBoxWrapper = function (title, callback) {
     wrapper.add(new EditorUI.Text(title).setWidth('90px'));
     return wrapper;
 };
+
+EditorUIFactory.createTableWrapper = function (title, callback) {
+    var wrapper = new EditorUI.Panel();
+
+    return wrapper;
+};

@@ -87,6 +87,7 @@ EditorUI.HorizontalRule.prototype = Object.create(UI.HorizontalRule.prototype);
 // Button
 EditorUI.Button = function (value) {
     UI.Button.call(this, value);
+    this.dom.className = 'btn btn-primary';
 };
 EditorUI.Button.prototype = Object.create(UI.Button.prototype);
 
@@ -96,7 +97,7 @@ EditorUI.Table = function (titles) {
     EditorUI.Element.call(this);
     // table
     var dom = document.createElement('table');
-    dom.className = 'Table';
+    dom.className = 'table table-bordered table-hover';
     // head
     var thead = document.createElement('thead');
     var tr = document.createElement('tr');
@@ -112,7 +113,7 @@ EditorUI.Table = function (titles) {
     dom.appendChild(tbody);
 
     this.dom = dom;
-    this.body = tbody
+    this.body = tbody;
     return this;
 };
 EditorUI.Table.prototype = Object.create(EditorUI.Element.prototype);
@@ -127,6 +128,33 @@ EditorUI.Table.prototype.addRow = function (UIElements) {
     this.body.appendChild(tr);
 };
 
+
+
+EditorUI.Canvas = function (width,height) {
+    EditorUI.Element.call(this);
+    var dom = document.createElement('canvas');
+    dom.width = width;
+    dom.height = height;
+    this.dom = dom;
+    return this;
+};
+
+EditorUI.Canvas.prototype = Object.create(EditorUI.Element.prototype);
+
+EditorUI.Canvas.prototype.setBackgroudColor = function (color) {
+    this.dom.style.backgroundColor = color;
+};
+
+EditorUI.Canvas.prototype.setPositon = function (top,left) {
+    this.dom.style.position = 'absolute';
+    this.dom.style.top = top;
+    this.dom.style.left = left;
+};
+
+EditorUI.Canvas.prototype.setSize = function (width,height) {
+    this.dom.width = width;
+    this.dom.height = height;
+};
 
 
 
