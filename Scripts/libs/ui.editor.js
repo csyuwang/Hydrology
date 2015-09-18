@@ -24,6 +24,10 @@ EditorUI.Text = function (text) {
 };
 EditorUI.Text.prototype = Object.create(UI.Text.prototype);
 
+EditorUI.Text.prototype.getValue = function(){
+    return this.dom.textContent;
+};
+
 // Input
 EditorUI.Input = function () {
     UI.Input.call(this);
@@ -87,10 +91,29 @@ EditorUI.HorizontalRule.prototype = Object.create(UI.HorizontalRule.prototype);
 // Button
 EditorUI.Button = function (value) {
     UI.Button.call(this, value);
-    this.dom.className = 'btn btn-primary';
+    //this.dom.className = 'btn btn-primary';
 };
 EditorUI.Button.prototype = Object.create(UI.Button.prototype);
 
+
+// TableRow
+EditorUI.TableRow = function (UIElements) {
+    EditorUI.Element.call(this);
+    var dom = document.createElement('tr');
+    $.each(UIElements, function (index, element) {
+        var td = document.createElement('td');
+        td.appendChild(element.dom);
+        dom.appendChild(td);
+    });
+    this.dom = dom;
+    this.elements = UIElements;
+    return this;
+};
+EditorUI.TableRow.prototype = Object.create(EditorUI.Element.prototype);
+
+EditorUI.TableRow.prototype.getElement = function (columnNo) {
+    return this.elements[columnNo];
+};
 
 // Table
 EditorUI.Table = function (titles) {
@@ -118,18 +141,15 @@ EditorUI.Table = function (titles) {
 };
 EditorUI.Table.prototype = Object.create(EditorUI.Element.prototype);
 
-EditorUI.Table.prototype.addRow = function (UIElements) {
-    var tr = document.createElement('tr');
-    $.each(UIElements, function (index, element) {
-        var td = document.createElement('td');
-        td.appendChild(element.dom);
-        tr.appendChild(td);
-    });
-    this.body.appendChild(tr);
+EditorUI.Table.prototype.addRow = function (row) {
+    this.body.appendChild(row.dom);
 };
 
+EditorUI.Table.prototype.clear = function () {
+    $(this.body).children().remove();
+};
 
-
+// Canvas
 EditorUI.Canvas = function (width,height) {
     EditorUI.Element.call(this);
     var dom = document.createElement('canvas');
@@ -141,11 +161,11 @@ EditorUI.Canvas = function (width,height) {
 
 EditorUI.Canvas.prototype = Object.create(EditorUI.Element.prototype);
 
-EditorUI.Canvas.prototype.setBackgroudColor = function (color) {
+EditorUI.Canvas.prototype.setBackgroundColor = function (color) {
     this.dom.style.backgroundColor = color;
 };
 
-EditorUI.Canvas.prototype.setPositon = function (top,left) {
+EditorUI.Canvas.prototype.setPosition = function (top,left) {
     this.dom.style.position = 'absolute';
     this.dom.style.top = top;
     this.dom.style.left = left;
@@ -154,6 +174,40 @@ EditorUI.Canvas.prototype.setPositon = function (top,left) {
 EditorUI.Canvas.prototype.setSize = function (width,height) {
     this.dom.width = width;
     this.dom.height = height;
+};
+
+EditorUI.Canvas.prototype.getContext = function () {
+    return this.dom.getContext('2d');
+};
+
+EditorUI.Canvas.prototype.getOffsetWidth = function () {
+    return this.dom.offsetWidth;
+};
+EditorUI.Canvas.prototype.getOffsetHeight = function () {
+    return this.dom.offsetHeight;
+};
+
+// ColorInput
+EditorUI.ColorInput = function (color) {
+    EditorUI.Element.call(this);
+    var dom = document.createElement('input');
+    dom.className = 'input_cxcolor';
+    dom.style.backgroundColor = color;
+    this.dom = dom;
+    return this;
+};
+EditorUI.ColorInput.prototype = Object.create(EditorUI.Element.prototype);
+
+EditorUI.ColorInput.prototype.getValue = function () {
+    return this.dom.style.backgroundColor;
+};
+
+EditorUI.ColorInput.prototype.disable = function () {
+    this.dom.attr('disabled', true);
+};
+
+EditorUI.ColorInput.prototype.enable = function () {
+    this.dom.attr('disabled', false);
 };
 
 

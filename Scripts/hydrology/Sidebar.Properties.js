@@ -1,5 +1,8 @@
 // 侧边栏物性输入
 Sidebar.Properties = function (editor) {
+
+    var signals = editor.signals;
+
     var string = Config.Properties.String;
     var stringArray = Config.Properties.StringArray;
     // 设置容器(标题等等)
@@ -7,17 +10,20 @@ Sidebar.Properties = function (editor) {
     container.setCollapsed(true);
     container.addStatic(new EditorUI.Text(string.title));
     // 设置导图checkbox
-    this.isImportMapCheckBox = new EditorUI.Checkbox().onChange(isImportMap);
+    var isImportMapCheckBox = new EditorUI.Checkbox().onChange(isImportMap);
+    this.isImportMapCheckBox = isImportMapCheckBox;
     container.add(this.isImportMapCheckBox);
     container.add(new EditorUI.Text(string.isImportMap));
     container.add(new EditorUI.Break());
     // 设置物性选择框
-    this.propertySelect = new EditorUI.Select().setOptions(stringArray.propertyOptions).onChange(updateProperty);
-    container.add(new EditorUI.Text(string.property));
+    var propertySelect = new EditorUI.Select().setOptions(stringArray.propertyOptions).onChange(updateProperty);
+    this.propertySelect = propertySelect;
+    container.add(new EditorUI.Text(string.propertyType));
     container.add(this.propertySelect);
     container.add(new EditorUI.Break());
     // 设置层选择框
-    this.layerSelect = new EditorUI.Select().setOptions(stringArray.layerOptions).onChange(updateLayer);
+    var layerSelect = new EditorUI.Select().setOptions(stringArray.layerOptions).onChange(updateLayer);
+    this.layerSelect = layerSelect;
     container.add(new EditorUI.Text(string.layer));
     container.add(this.layerSelect);
     container.add(new EditorUI.Break());
@@ -30,7 +36,8 @@ Sidebar.Properties = function (editor) {
     container.add(new EditorUI.Button(string.delete).onClick(deleteZone));
     container.add(new EditorUI.Button(string.save).onClick(saveZone));
     // 表格
-    this.zoneTable = new EditorUI.Table(stringArray.tableHeaders);
+    var zoneTable = new EditorUI.Table(stringArray.tableHeaders);
+    this.zoneTable = zoneTable;
     container.add(this.zoneTable);
 
     // 是否导图
@@ -40,12 +47,14 @@ Sidebar.Properties = function (editor) {
 
     // 切换物性
     function updateProperty() {
-        alert(this.getValue());
+        editor.propertyType = this.getValue();
+        signals.propertyChanged.dispatch(editor.projectId,editor.propertyType);
     }
 
     // 切换层
     function updateLayer() {
-        alert(this.getValue());
+        editor.layer = this.getValue();
+        signals.layerChanged.dispatch(editor.projectId,editor.propertyType,editor.layer);
     }
 
     function addZone(){
@@ -60,6 +69,53 @@ Sidebar.Properties = function (editor) {
     function saveZone(){
         alert('save');
     }
+
+    function zoneSelected() {
+        console.log(this.getElement(2));
+    }
+
+    function initZoneTable(projectId,propertyType) {
+        zoneTable.clear();
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json',
+            url: '../getdata/getZones.json',
+            data: { 'propertyType': propertyType , 'projectId': projectId},
+            dataType: 'json',
+            success: function (zones) {
+                $.each(zones, function (index,zone) {
+                    var nameText = new EditorUI.Text(zone.name);
+                    var colorInput = new EditorUI.ColorInput(zone.color);
+                    var paramsText = new EditorUI.Text(zone.params.join());
+                    var row = new EditorUI.TableRow([new EditorUI.Checkbox(),nameText,colorInput,paramsText]).onClick(zoneSelected);
+                    zoneTable.addRow(row);
+                });
+            }
+        });
+    }
+
+    function initLayerSelect(projectId) {
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json',
+            url: '../getdata/getProjectInfo.json',
+            data: { 'projectId': projectId },
+            dataType: 'json',
+            success: function (projectInfo) {
+                var options = {'0':'请输入'};
+                for(var i = 1; i<=projectInfo.layerCount;i++) {
+                    options[i] = i;
+                }
+                layerSelect.setOptions(options);
+            }
+        });
+    }
+
+    // handle signals
+    // 物性改变时初始化zoneTable
+    signals.propertyChanged.add( initZoneTable );
+    // 项目改变时初始化layerSelect
+    signals.projectChanged.add( initLayerSelect );
 
     return container;
 };

@@ -1,12 +1,19 @@
 var Config = {
     'Properties': {},
-    'Canvas': {}
+    'Canvas': {},
+    'Project':{},
+    'View':{}
+};
+
+Config.Project.String = {
+    'title': 'Project',
+    'project':'Project'
 };
 
 Config.Properties.String = {
     'title': 'Properties',
     'isImportMap': 'IsImportMap',
-    'property': 'Property',
+    "propertyType": 'Property',
     'layer': 'Layer',
     'zone': 'Zone',
     'add': 'Add',
@@ -26,4 +33,13 @@ Config.Canvas.Style ={
     'backgroundColor' : '#CBCBCA',
     'top': '0px',
     'left': (window.innerWidth / 3 - (window.innerHeight - 64) / 2) + 'px'
+};
+
+Config.View.String ={
+    'title': 'View',
+    'viewColumn' : 'viewColumn',
+    'viewRow' : 'viewRow',
+    'viewLayer': 'viewLayer',
+    'previous': 'previous',
+    'next': 'next'
 };

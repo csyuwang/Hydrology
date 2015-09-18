@@ -20,3 +20,8 @@
     2. 删除ui.editor.factory.js
 2015-09-10
     1. 添加EditorUI.Canvas
+2015-09-14
+    1. 添加Sidebar.Project.js，负责项目选择
+2015-09-18
+    1. 添加Sidebar.View.js, 负责观察方向（x,y,z）
+    2. 添加GridHelper.js, 负责网格计算的相关方法
