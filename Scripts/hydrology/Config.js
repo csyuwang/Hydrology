@@ -27,7 +27,7 @@ Config.Properties.StringArray = {
     'tableHeaders': ['', 'Name', 'Color', 'Parameter']
 };
 
-Config.Canvas.Style ={
+Config.Canvas.Style = {
     'width' : window.innerHeight - 64,
     'height' : window.innerHeight - 64,
     'backgroundColor' : '#CBCBCA',
@@ -35,7 +35,7 @@ Config.Canvas.Style ={
     'left': (window.innerWidth / 3 - (window.innerHeight - 64) / 2) + 'px'
 };
 
-Config.View.String ={
+Config.View.String = {
     'title': 'View',
     'viewColumn' : 'viewColumn',
     'viewRow' : 'viewRow',

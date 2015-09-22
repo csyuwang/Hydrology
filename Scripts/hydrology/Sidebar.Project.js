@@ -32,6 +32,31 @@ Sidebar.Project = function (editor) {
         signals.projectChanged.dispatch(editor.projectId);
     }
 
+    // 获得项目信息
+    function getProjectInfo(projectId) {
+        $.ajax({
+            type: 'GET',
+            contentType: 'application/json',
+            url: '../getdata/getProjectInfo.json',
+            data: { 'projectId': projectId },
+            dataType: 'json',
+            success: function (projectInfo) {
+                editor.gridHelper.X_MIN = projectInfo.x_min;
+                editor.gridHelper.Y_MIN = projectInfo.y_min;
+                editor.gridHelper.Z_MIN = projectInfo.z_min;
+                editor.gridHelper.X_MAX = projectInfo.x_max;
+                editor.gridHelper.Y_MAX = projectInfo.y_max;
+                editor.gridHelper.Z_MAX = projectInfo.z_max;
+                editor.gridHelper.layerCount = projectInfo.layerCount;
+                editor.gridHelper.rowCount = projectInfo.rowCount;
+                editor.gridHelper.columnCount = projectInfo.columnCount;
+                signals.projectInitialized.dispatch();
+            }
+        });
+    }
+
+    signals.projectChanged.add( getProjectInfo);
+
     return container;
 };
 

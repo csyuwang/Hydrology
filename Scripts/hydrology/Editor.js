@@ -5,9 +5,16 @@ var Editor = function () {
         windowResize: new SIGNALS.Signal(),
         propertyChanged: new SIGNALS.Signal(),
         projectChanged: new SIGNALS.Signal(),
-        layerChanged: new SIGNALS.Signal()
+        projectInitialized: new SIGNALS.Signal(),
+        layerChanged: new SIGNALS.Signal(),
+        rowChanged: new SIGNALS.Signal(),
+        columnChanged: new SIGNALS.Signal(),
+        viewLayer: new SIGNALS.Signal(),
+        viewRow: new SIGNALS.Signal(),
+        viewColumn: new SIGNALS.Signal()
     };
 
     this.gridHelper = new GridHelper();
+    this.systemStatus = new SystemStatus();
 
 }

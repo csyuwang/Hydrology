@@ -94,28 +94,19 @@ Sidebar.Properties = function (editor) {
         });
     }
 
-    function initLayerSelect(projectId) {
-        $.ajax({
-            type: 'GET',
-            contentType: 'application/json',
-            url: '../getdata/getProjectInfo.json',
-            data: { 'projectId': projectId },
-            dataType: 'json',
-            success: function (projectInfo) {
-                var options = {'0':'请输入'};
-                for(var i = 1; i<=projectInfo.layerCount;i++) {
-                    options[i] = i;
-                }
-                layerSelect.setOptions(options);
-            }
-        });
+    function initLayerSelect() {
+        var options = {'0':'请选择'};
+        for(var i = 1; i<=editor.gridHelper.layerCount;i++) {
+            options[i] = i;
+        }
+        layerSelect.setOptions(options);
     }
 
     // handle signals
     // 物性改变时初始化zoneTable
     signals.propertyChanged.add( initZoneTable );
     // 项目改变时初始化layerSelect
-    signals.projectChanged.add( initLayerSelect );
+    signals.projectInitialized.add( initLayerSelect );
 
     return container;
 };
