@@ -6,6 +6,18 @@ EditorUI.Element = function () {
 };
 EditorUI.Element.prototype = Object.create(UI.Element.prototype);
 
+EditorUI.Element.prototype.bind = function(event,callback) {
+    callback.bind(this);
+    this.dom.addEventListener( event.toLowerCase(), callback, false );
+    return this;
+};
+
+EditorUI.Element.prototype.unbind = function(event,callback) {
+    this.dom.removeEventListener( event.toLowerCase(), callback, false );
+    return this;
+};
+
+
 // Panel
 EditorUI.Panel = function () {
     UI.Panel.call(this);
@@ -185,6 +197,11 @@ EditorUI.Canvas.prototype.getOffsetWidth = function () {
 };
 EditorUI.Canvas.prototype.getOffsetHeight = function () {
     return this.dom.offsetHeight;
+};
+
+EditorUI.Canvas.prototype.clear = function () {
+    var ctx = this.dom.getContext('2d');
+    ctx.clearRect(0, 0, this.dom.offsetWidth, this.dom.offsetHeight);
 };
 
 // ColorInput

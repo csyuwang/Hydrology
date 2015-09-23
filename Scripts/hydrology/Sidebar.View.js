@@ -23,22 +23,22 @@ Sidebar.View = function (editor) {
 
     function viewLayer() {
         //status.layer = 1;
-        status.viewType = SystemStatus.ViewType.LAYER;
-        //signals.viewLayer.dispatch();
+        //status.viewType = SystemStatus.ViewType.LAYER;
+        status.checkedViewButton = SystemStatus.ViewType.LAYER;
+        signals.viewLayer.dispatch();
         //signals.layerChanged.dispatch(status.layer);
     }
 
     function viewRow() {
-        //status.row = 1;
-        status.viewType = SystemStatus.ViewType.ROW;
-        //signals.viewRow.dispatch();
-        //signals.rowChanged.dispatch(status.column);
+        status.checkedViewButton = SystemStatus.ViewType.ROW;
+        signals.viewRow.dispatch();
     }
 
     function viewColumn() {
         //status.column = 1;
-        status.viewType = SystemStatus.ViewType.Column;
-        //signals.viewColumn.dispatch();
+        //status.viewType = SystemStatus.ViewType.COLUMN;
+        status.checkedViewButton = SystemStatus.ViewType.COLUMN;
+        signals.viewColumn.dispatch();
         //signals.columnChanged.dispatch(status.row);
     }
 
@@ -97,7 +97,7 @@ Sidebar.View = function (editor) {
         else if(status.viewType == SystemStatus.ViewType.ROW){
             previousRow();
         }
-        else if(status.viewType == SystemStatus.ViewType.Column){
+        else if(status.viewType == SystemStatus.ViewType.COLUMN){
             previousColumn();
         }
     }
@@ -109,7 +109,7 @@ Sidebar.View = function (editor) {
         else if(status.viewType == SystemStatus.ViewType.ROW){
             nextRow();
         }
-        else if(status.viewType == SystemStatus.ViewType.Column){
+        else if(status.viewType == SystemStatus.ViewType.COLUMN){
             nextColumn();
         }
 
