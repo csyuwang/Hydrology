@@ -3,9 +3,10 @@ var Editor = function () {
     var SIGNALS = signals;
     this.signals = {
         windowResize: new SIGNALS.Signal(),
-        propertyChanged: new SIGNALS.Signal(),
         projectChanged: new SIGNALS.Signal(),
         projectInitialized: new SIGNALS.Signal(),
+        inputTypeChanged: new SIGNALS.Signal(),
+        propertyChanged: new SIGNALS.Signal(),
         layerChanged: new SIGNALS.Signal(),
         rowChanged: new SIGNALS.Signal(),
         columnChanged: new SIGNALS.Signal(),

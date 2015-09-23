@@ -2,11 +2,11 @@
 Sidebar.Properties = function (editor) {
 
     var signals = editor.signals;
-
     var string = Config.Properties.String;
     var stringArray = Config.Properties.StringArray;
     // 设置容器(标题等等)
     var container = new EditorUI.CollapsiblePanel();
+    container.setDisplay( 'none' );
     container.setCollapsed(true);
     container.addStatic(new EditorUI.Text(string.title));
     // 设置导图checkbox
@@ -107,7 +107,16 @@ Sidebar.Properties = function (editor) {
     signals.propertyChanged.add( initZoneTable );
     // 项目改变时初始化layerSelect
     signals.projectInitialized.add( initLayerSelect );
-
+    // 输入类型改变为物性时显示collapsiblePanel
+    signals.inputTypeChanged.add(function (inputType) {
+        container.setDisplay( 'none' );
+        if(inputType == SystemStatus.InputType.PROPERTIES) {
+            container.setDisplay( 'block' );
+        }
+    } );
+    
+    
+    
     return container;
 };
 

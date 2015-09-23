@@ -1,4 +1,4 @@
-// 侧边栏物性输入
+// 侧边栏视图
 Sidebar.View = function (editor) {
 
     var signals = editor.signals;
@@ -22,24 +22,24 @@ Sidebar.View = function (editor) {
     container.add(new EditorUI.Button(string.next).onClick(next));
 
     function viewLayer() {
-        status.layer = 1;
+        //status.layer = 1;
         status.viewType = SystemStatus.ViewType.LAYER;
-        signals.viewLayer.dispatch();
-        signals.layerChanged.dispatch(status.layer);
+        //signals.viewLayer.dispatch();
+        //signals.layerChanged.dispatch(status.layer);
     }
 
     function viewRow() {
-        status.row = 1;
+        //status.row = 1;
         status.viewType = SystemStatus.ViewType.ROW;
-        signals.viewRow.dispatch();
-        signals.columnChanged.dispatch(status.column);
+        //signals.viewRow.dispatch();
+        //signals.rowChanged.dispatch(status.column);
     }
 
     function viewColumn() {
-        status.column = 1;
+        //status.column = 1;
         status.viewType = SystemStatus.ViewType.Column;
-        signals.viewColumn.dispatch();
-        signals.rowChanged.dispatch(status.row);
+        //signals.viewColumn.dispatch();
+        //signals.columnChanged.dispatch(status.row);
     }
 
     function nextLayer() {

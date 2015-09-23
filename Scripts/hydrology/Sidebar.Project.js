@@ -2,6 +2,7 @@
 Sidebar.Project = function (editor) {
 
     var signals = editor.signals;
+    var status = editor.systemStatus;
 
     var string = Config.Project.String;
     // 设置容器(标题等等)
@@ -28,8 +29,8 @@ Sidebar.Project = function (editor) {
 
     // 切换项目
     function updateProject() {
-        editor.projectId = this.getValue();
-        signals.projectChanged.dispatch(editor.projectId);
+        status.projectId = this.getValue();
+        signals.projectChanged.dispatch(status.projectId);
     }
 
     // 获得项目信息

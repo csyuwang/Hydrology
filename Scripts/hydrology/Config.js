@@ -2,6 +2,7 @@ var Config = {
     'Properties': {},
     'Canvas': {},
     'Project':{},
+    'Input':{},
     'View':{}
 };
 
@@ -30,7 +31,7 @@ Config.Properties.StringArray = {
 Config.Canvas.Style = {
     'width' : window.innerHeight - 64,
     'height' : window.innerHeight - 64,
-    'backgroundColor' : '#CBCBCA',
+    'backgroundColor' : '#CBCBCB',
     'top': '0px',
     'left': (window.innerWidth / 3 - (window.innerHeight - 64) / 2) + 'px'
 };
@@ -42,4 +43,13 @@ Config.View.String = {
     'viewLayer': 'viewLayer',
     'previous': 'previous',
     'next': 'next'
+};
+
+Config.Input.String = {
+    'title': 'Input',
+    'grid': 'Grid',
+    'wells': 'Wells',
+    'properties' : 'Properties',
+    'boundaries' : 'Boundaries',
+    'particles': 'Particles'
 };
