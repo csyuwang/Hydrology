@@ -4,8 +4,12 @@ var Config = {
     'Project':{},
     'Input':{},
     'View':{},
-    'Toolbar':{}
+    'Toolbar':{},
+    'Style':{},
+    'Grid':{}
 };
+
+
 
 Config.Project.String = {
     'title': 'Project',
@@ -26,7 +30,8 @@ Config.Properties.String = {
 Config.Properties.StringArray = {
     'propertyOptions': ['请选择', 'Conductivity', 'Dispersion', 'Bluk_Density', 'Initial_Head', 'Storage', 'Spac_Params', 'Initial_Concentration'],
     'layerOptions': ['请选择'],
-    'tableHeaders': ['', 'Name', 'Color', 'Parameter']
+    'tableHeaders': ['', 'Name', 'Color', 'Parameter'],
+    'zoneKeys' : ['checked','name','color','params']
 };
 
 Config.Canvas.Style = {
@@ -63,4 +68,18 @@ Config.Toolbar.String = {
     'x' : 'X',
     'y': 'Y',
     'z': 'Z'
+};
+
+Config.Style = {
+    'defaultColor' : "#000000"
+};
+
+
+Config.Grid.String = {
+    'title' : 'Grid',
+    'save' : 'save',
+    'addRowLine':'addRowLine',
+    'addColumnLine':'addColumnLine',
+    'deleteRowLine':'deleteRowLine',
+    'deleteColumnLine':'deleteColumnLine'
 };

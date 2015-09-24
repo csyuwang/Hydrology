@@ -2,6 +2,9 @@
 Sidebar.Properties = function (editor) {
 
     var signals = editor.signals;
+    var status = editor.systemStatus;
+    var zoneHelper = editor.zoneHelper;
+
     var string = Config.Properties.String;
     var stringArray = Config.Properties.StringArray;
     // 设置容器(标题等等)
@@ -36,7 +39,7 @@ Sidebar.Properties = function (editor) {
     container.add(new EditorUI.Button(string.delete).onClick(deleteZone));
     container.add(new EditorUI.Button(string.save).onClick(saveZone));
     // 表格
-    var zoneTable = new EditorUI.Table(stringArray.tableHeaders);
+    var zoneTable = new EditorUI.Table(stringArray.tableHeaders,stringArray.zoneKeys);
     this.zoneTable = zoneTable;
     container.add(this.zoneTable);
 
@@ -47,18 +50,22 @@ Sidebar.Properties = function (editor) {
 
     // 切换物性
     function updateProperty() {
-        editor.propertyType = this.getValue();
-        signals.propertyChanged.dispatch(editor.projectId,editor.propertyType);
+        status.propertyType = this.getValue();
+        signals.propertyChanged.dispatch();
     }
 
     // 切换层
     function updateLayer() {
-        editor.layer = this.getValue();
-        signals.layerChanged.dispatch(editor.projectId,editor.propertyType,editor.layer);
+        status.layer = this.getValue();
+        signals.layerChanged.dispatch();
     }
 
     function addZone(){
-        alert('add');
+        var nameText = new EditorUI.ContentEditableText('newZone');
+        var colorInput = new EditorUI.ColorInput().enable();
+        var paramsText = new EditorUI.ContentEditableText('0,0,0');
+        var row = new EditorUI.TableRow(zoneTable.rowCount,[new EditorUI.Checkbox(),nameText,colorInput,paramsText]).onClick(zoneSelected);
+        zoneTable.addRow(row);
     }
     function removeZone(){
         alert('remove');
@@ -67,29 +74,38 @@ Sidebar.Properties = function (editor) {
         alert('delete');
     }
     function saveZone(){
-        alert('save');
+        zoneHelper.collectData(zoneTable);
+        zoneHelper.emit();
     }
 
     function zoneSelected() {
-        console.log(this.getElement(2));
+        if(this.index == 0) {
+            console.log('default');
+            return ;
+        }
+        else{
+            console.log(this.index);
+        }
     }
 
-    function initZoneTable(projectId,propertyType) {
+    function initZoneTable() {
         zoneTable.clear();
         $.ajax({
             type: 'GET',
             contentType: 'application/json',
             url: '../getdata/getZones.json',
-            data: { 'propertyType': propertyType , 'projectId': projectId},
+            data: { 'propertyType': status.propertyType , 'projectId': status.projectId},
             dataType: 'json',
             success: function (zones) {
                 $.each(zones, function (index,zone) {
                     var nameText = new EditorUI.Text(zone.name);
-                    var colorInput = new EditorUI.ColorInput(zone.color);
+                    var colorInput = new EditorUI.ColorInput(zone.color).disable();
                     var paramsText = new EditorUI.Text(zone.params.join());
-                    var row = new EditorUI.TableRow([new EditorUI.Checkbox(),nameText,colorInput,paramsText]).onClick(zoneSelected);
+                    var row = new EditorUI.TableRow(index,[new EditorUI.Checkbox(),nameText,colorInput,paramsText]).onClick(zoneSelected);
                     zoneTable.addRow(row);
                 });
+                // 记下需要保存的zone的起始index
+                zoneHelper.startIndex = zoneTable.rowCount;
             }
         });
     }

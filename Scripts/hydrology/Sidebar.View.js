@@ -24,20 +24,20 @@ Sidebar.View = function (editor) {
     function viewLayer() {
         //status.layer = 1;
         //status.viewType = SystemStatus.ViewType.LAYER;
-        status.checkedViewButton = SystemStatus.ViewType.LAYER;
+        status.selectedViewButton = SystemStatus.ViewType.LAYER;
         signals.viewLayer.dispatch();
         //signals.layerChanged.dispatch(status.layer);
     }
 
     function viewRow() {
-        status.checkedViewButton = SystemStatus.ViewType.ROW;
+        status.selectedViewButton = SystemStatus.ViewType.ROW;
         signals.viewRow.dispatch();
     }
 
     function viewColumn() {
         //status.column = 1;
         //status.viewType = SystemStatus.ViewType.COLUMN;
-        status.checkedViewButton = SystemStatus.ViewType.COLUMN;
+        status.selectedViewButton = SystemStatus.ViewType.COLUMN;
         signals.viewColumn.dispatch();
         //signals.columnChanged.dispatch(status.row);
     }

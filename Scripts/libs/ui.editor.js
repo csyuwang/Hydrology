@@ -40,6 +40,15 @@ EditorUI.Text.prototype.getValue = function(){
     return this.dom.textContent;
 };
 
+// contentEditableText
+EditorUI.ContentEditableText = function (text) {
+    EditorUI.Text.call(this, text);
+    this.dom.setAttribute('contenteditable',true);
+};
+EditorUI.ContentEditableText.prototype = Object.create(EditorUI.Text.prototype);
+
+
+
 // Input
 EditorUI.Input = function () {
     UI.Input.call(this);
@@ -109,7 +118,7 @@ EditorUI.Button.prototype = Object.create(UI.Button.prototype);
 
 
 // TableRow
-EditorUI.TableRow = function (UIElements) {
+EditorUI.TableRow = function (index,UIElements) {
     EditorUI.Element.call(this);
     var dom = document.createElement('tr');
     $.each(UIElements, function (index, element) {
@@ -119,6 +128,7 @@ EditorUI.TableRow = function (UIElements) {
     });
     this.dom = dom;
     this.elements = UIElements;
+    this.index = index;
     return this;
 };
 EditorUI.TableRow.prototype = Object.create(EditorUI.Element.prototype);
@@ -128,7 +138,7 @@ EditorUI.TableRow.prototype.getElement = function (columnNo) {
 };
 
 // Table
-EditorUI.Table = function (titles) {
+EditorUI.Table = function (titles,zoneKeys) {
     EditorUI.Element.call(this);
     // table
     var dom = document.createElement('table');
@@ -149,16 +159,28 @@ EditorUI.Table = function (titles) {
 
     this.dom = dom;
     this.body = tbody;
+
+    this.rowCount = 0;
+    this.columnCnt = titles.length;
+    this.rows = [];
+    this.zoneKeys = zoneKeys;
     return this;
 };
 EditorUI.Table.prototype = Object.create(EditorUI.Element.prototype);
 
 EditorUI.Table.prototype.addRow = function (row) {
     this.body.appendChild(row.dom);
+    this.rows[this.rowCount++] = row;
+};
+
+EditorUI.Table.prototype.getRowByIndex = function (index) {
+    return this.rows[index];
 };
 
 EditorUI.Table.prototype.clear = function () {
     $(this.body).children().remove();
+    this.rowCount = 0;
+    this.rows = [];
 };
 
 // Canvas
@@ -206,6 +228,7 @@ EditorUI.Canvas.prototype.clear = function () {
 
 // ColorInput
 EditorUI.ColorInput = function (color) {
+    var color = arguments[0] || "#000000";
     EditorUI.Element.call(this);
     var dom = document.createElement('input');
     dom.className = 'input_cxcolor';
@@ -216,15 +239,17 @@ EditorUI.ColorInput = function (color) {
 EditorUI.ColorInput.prototype = Object.create(EditorUI.Element.prototype);
 
 EditorUI.ColorInput.prototype.getValue = function () {
-    return this.dom.style.backgroundColor;
+    return $(this.dom).val();
 };
 
 EditorUI.ColorInput.prototype.disable = function () {
-    this.dom.attr('disabled', true);
+    this.dom.setAttribute('disabled', true);
+    return this;
 };
 
 EditorUI.ColorInput.prototype.enable = function () {
-    this.dom.attr('disabled', false);
+    $(this.dom).cxColor();
+    return this;
 };
 
 

@@ -58,6 +58,7 @@ GridHelper.prototype.canvas2GridScaleY = function (canvasY, gridY_max) {
 //    return z * this.Z_MAX / this.canvasHeight ;
 //}
 
+// 网格坐标转为标准坐标（坐标所在网格的左下坐标）
 GridHelper.prototype.getNormalXCoordinateIndex = function (x) {
     for (var i = 0; i < this.xCoordinates.length-1; i++) {
         if (x >= this.xCoordinates[i] && x < this.xCoordinates[i + 1]) {

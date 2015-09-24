@@ -35,7 +35,6 @@ var Toolbar = function (editor) {
     container.add(new EditorUI.Text(string.z + ':'));
     container.add(zText);
 
-
     // handle signals
     signals.layerChanged.add(function (layer) {
         layerText.setValue(layer);
