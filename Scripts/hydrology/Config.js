@@ -3,7 +3,8 @@ var Config = {
     'Canvas': {},
     'Project':{},
     'Input':{},
-    'View':{}
+    'View':{},
+    'Toolbar':{}
 };
 
 Config.Project.String = {
@@ -52,4 +53,14 @@ Config.Input.String = {
     'properties' : 'Properties',
     'boundaries' : 'Boundaries',
     'particles': 'Particles'
+};
+
+
+Config.Toolbar.String = {
+    'layer': 'Layer',
+    'row': 'Row',
+    'column' : 'Column',
+    'x' : 'X',
+    'y': 'Y',
+    'z': 'Z'
 };

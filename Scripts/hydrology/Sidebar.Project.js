@@ -29,8 +29,11 @@ Sidebar.Project = function (editor) {
 
     // 切换项目
     function updateProject() {
+        // 项目改变重置系统状态
+        status.reset();
         status.projectId = this.getValue();
         signals.projectChanged.dispatch(status.projectId);
+        signals.inputTypeChanged.dispatch(status.inputType);
     }
 
     // 获得项目信息

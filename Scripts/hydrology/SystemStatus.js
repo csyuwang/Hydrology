@@ -22,8 +22,15 @@ SystemStatus.InputType.PROPERTIES = 3;
 SystemStatus.InputType.BOUNDARIES = 4;
 SystemStatus.InputType.PARICLES = 5;
 
-
-
+SystemStatus.prototype.reset = function () {
+    this.row = 1;
+    this.column = 1;
+    this.layer = 1;
+    this.viewType = 1;
+    this.checkedViewButton = 0;
+    this.inputType = 0;
+    this.projectId = 0;
+}
 
 
 
