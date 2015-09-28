@@ -71,13 +71,15 @@ Config.Toolbar.String = {
 };
 
 Config.Style = {
-    'defaultColor' : "#000000"
+    'defaultColor' : "#000000",
+    'markColor': "ff0000"
 };
 
 
 Config.Grid.String = {
     'title' : 'Grid',
     'save' : 'save',
+    'reset' : 'reset',
     'addRowLine':'addRowLine',
     'addColumnLine':'addColumnLine',
     'deleteRowLine':'deleteRowLine',

@@ -26,11 +26,13 @@ SystemStatus.InputType.PARICLES = 5;
 
 // 画图类型
 SystemStatus.DrawType = {};
+SystemStatus.DrawType.NULL = 0;
 SystemStatus.DrawType.FILLGRID = 1;
 SystemStatus.DrawType.ADDROWLINE = 2;
 SystemStatus.DrawType.DELETEROWLINE = 3;
 SystemStatus.DrawType.ADDCOLUMNLINE = 4;
 SystemStatus.DrawType.DELETECOLUMNLINE = 5;
+
 
 SystemStatus.prototype.reset = function () {
     this.row = 1;

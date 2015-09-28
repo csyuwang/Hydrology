@@ -19,11 +19,9 @@ var Editor = function () {
         viewRow: new SIGNALS.Signal(),
         viewColumn: new SIGNALS.Signal(),
 
-        addRowLine: new SIGNALS.Signal(),
-        deleteRowLine: new SIGNALS.Signal(),
-        addColumnLine: new SIGNALS.Signal(),
-        deleteColumnLine: new SIGNALS.Signal(),
-        fillGrid: new SIGNALS.Signal()
+
+        editGrid: new SIGNALS.Signal(),
+        resetEditGrid: new SIGNALS.Signal()
 
     };
 

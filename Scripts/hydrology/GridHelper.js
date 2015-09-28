@@ -12,6 +12,7 @@ var GridHelper = function () {
     this.layerCount = 0;
     this.rowCount = 0;
     this.columnCount = 0;
+    this.threehold = 5;
 };
 
 // Tools
@@ -218,7 +219,7 @@ GridHelper.prototype.clearGrid = function (canvas) {
 GridHelper.prototype.markRow = function (canvas,xIndex,yIndex,color) {
     var ctx = canvas.getContext();
     ctx.clearRect(0, 0, canvas.getOffsetWidth(), canvas.getOffsetHeight());
-    ctx.globalAlpha = 0.4
+    ctx.globalAlpha = 0.4;
     var bottomY = this.grid2CanvasScaleY(this.yCoordinates[yIndex],this.Y_MAX);
     var topY = this.grid2CanvasScaleY(this.yCoordinates[yIndex+1],this.Y_MAX);
     ctx.fillStyle = color;
@@ -228,11 +229,54 @@ GridHelper.prototype.markRow = function (canvas,xIndex,yIndex,color) {
 GridHelper.prototype.markColumn = function (canvas,xIndex,yIndex,color) {
     var ctx = canvas.getContext();
     ctx.clearRect(0, 0, canvas.getOffsetWidth(), canvas.getOffsetHeight());
-    ctx.globalAlpha = 0.4
+    ctx.globalAlpha = 0.4;
     var leftX = this.grid2CanvasScaleX(this.xCoordinates[xIndex],this.X_MAX);
     var rightX = this.grid2CanvasScaleX(this.xCoordinates[xIndex+1],this.X_MAX);
     ctx.fillStyle = color;
     ctx.fillRect(leftX,0, rightX-leftX, canvas.getOffsetHeight());
+}
+
+// 标记行线
+GridHelper.prototype.markRowLine = function (canvas,y,color,isClear) {
+
+    isClear = isClear || false;
+
+    var ctx = canvas.getContext();
+    if(isClear) {
+        ctx.clearRect(0, 0, canvas.getOffsetWidth(), canvas.getOffsetHeight());
+    }
+    ctx.save();
+    ctx.translate(0.5,0.5);
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    var Y = this.grid2CanvasScaleY(y,this.Y_MAX);
+    ctx.moveTo(0 , Y);
+    ctx.lineTo(this.canvasWidth , Y);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.restore();
+}
+// 标记列线
+GridHelper.prototype.markColumnLine = function (canvas,x,color,isClear) {
+
+    isClear = isClear || false;
+
+    var ctx = canvas.getContext();
+    if(isClear) {
+        ctx.clearRect(0, 0, canvas.getOffsetWidth(), canvas.getOffsetHeight());
+    }
+    ctx.save();
+    ctx.translate(0.5,0.5);
+    ctx.beginPath();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1;
+    var X = this.grid2CanvasScaleX(x,this.X_MAX);
+    ctx.moveTo(X , 0);
+    ctx.lineTo(X , this.canvasHeight);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.restore();
 }
 
 

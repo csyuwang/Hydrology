@@ -22,28 +22,34 @@ Sidebar.Grid = function (editor) {
     container.add(new EditorUI.Break());
     container.add(new EditorUI.Break());
     container.add(new EditorUI.Button(string.save).onClick(save));
+    container.add(new EditorUI.Button(string.reset).onClick(reset));
 
     function addRowLine() {
         status.selectedDrawType = SystemStatus.DrawType.ADDROWLINE;
-        signals.addRowLine.dispatch();
+        signals.editGrid.dispatch();
     }
 
     function deleteRowLine() {
         status.selectedDrawType = SystemStatus.DrawType.DELETEROWLINE;
-        signals.deleteRowLine.dispatch();
+        signals.editGrid.dispatch();
     }
 
     function addColumnLine() {
         status.selectedDrawType = SystemStatus.DrawType.ADDCOLUMNLINE;
-        signals.addColumnLine.dispatch();
+        signals.editGrid.dispatch();
     }
     function deleteColumnLine() {
         status.selectedDrawType = SystemStatus.DrawType.DELETECOLUMNLINE;
-        signals.deleteColumnLine.dispatch();
+        signals.editGrid.dispatch();
     }
 
     function save() {
+        // 保存网格信息
+    }
 
+    function reset() {
+        status.selectedDrawType = SystemStatus.DrawType.NULL;
+        signals.resetEditGrid.dispatch();
     }
 
     signals.inputTypeChanged.add(function (inputType) {
